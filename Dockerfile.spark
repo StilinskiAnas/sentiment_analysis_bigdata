@@ -1,0 +1,15 @@
+# Use the base Spark image
+FROM bitnami/spark:3.4
+
+# Switch to root user to install additional tools if needed
+USER root
+
+# Install curl (if not already installed)
+RUN install_packages curl
+
+# Switch back to the default non-root user
+USER 1001
+
+# Add custom JAR (example: AWS SDK)
+RUN curl -o /opt/bitnami/spark/jars/aws-java-sdk-bundle-1.11.704.jar \
+    https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.704/aws-java-sdk-bundle-1.11.704.jar
